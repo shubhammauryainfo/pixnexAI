@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const navigate = useNavigate()
-  const {user, setShowLogin} = useContext(AppContext)
+  const { user, setShowLogin } = useContext(AppContext)
   const handleClick = () => {
     if (user) {
       navigate('/result')
@@ -92,7 +92,7 @@ const Header = () => {
         transition={{ delay: 1.2, duration: 0.8 }}
         className="mt-2 text-neutral-600"
       >
-        Generated images from Imagify
+        Generated images from PixnexAI
       </motion.p>
     </motion.div>
   );
