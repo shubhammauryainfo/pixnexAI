@@ -38,6 +38,7 @@
             |-- twitter_icon.svg
         |-- components
             |-- Description.jsx
+            |-- Features.jsx
             |-- Footer.jsx
             |-- GenerateBtn.jsx
             |-- Header.jsx
@@ -53,6 +54,7 @@
             |-- BuyCredit.jsx
             |-- Home.jsx
             |-- Result.jsx
+            |-- Tools.jsx
     |-- tailwind.config.js
     |-- vite.config.js
 |-- README.md
