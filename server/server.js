@@ -14,7 +14,7 @@ app.use(
     origin: ["https://pixnex.flickdesk.tech", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "token"],
   }),
 );
 
