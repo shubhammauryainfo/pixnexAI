@@ -56,10 +56,16 @@
             |-- Result.jsx
             |-- Tools.jsx
     |-- tailwind.config.js
+    |-- vercel.json
     |-- vite.config.js
+|-- PROJECT_DOCUMENTATION.pdf
 |-- README.md
 |-- server
     |-- .env
+    |-- .gitignore
+    |-- .vercel
+        |-- project.json
+        |-- README.txt
     |-- bun.lock
     |-- config
         |-- mongodb.js
