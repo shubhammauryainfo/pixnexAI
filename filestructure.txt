@@ -58,7 +58,6 @@
     |-- tailwind.config.js
     |-- vercel.json
     |-- vite.config.js
-|-- PROJECT_DOCUMENTATION.pdf
 |-- README.md
 |-- server
     |-- .env
