@@ -30,7 +30,7 @@ const Header = () => {
         animate={{ opacity: 1, y: 0 }}
         className="text-stone-500 inline-flex text-center bg-white gap-2 px-6 py-1 rounded-full border border-neutral-500"
       >
-        <p>Best text to image generator</p>
+        <p>AI image and utility tools</p>
         <img src={assets.star_icon} />
       </motion.div>
       <motion.h1
@@ -39,7 +39,7 @@ const Header = () => {
         transition={{ delay: 0.4, duration: 2 }}
         className="text-4xl max-w-[300px] sm:text-7xl sm:max-w-[590px] mx-auto mt-10 text-center"
       >
-        Turn text to <span className="text-blue-600">image</span>, in seconds.
+        Create <span className="text-blue-600">images</span> and productivity tools in seconds.
       </motion.h1>
       <motion.p
         initial={{ opacity: 0, y: 20 }}
@@ -47,8 +47,9 @@ const Header = () => {
         transition={{ delay: 0.6, duration: 0.8 }}
         className="text-center max-w-xl mx-auto mt-5"
       >
-        Unleash your creativity with AI. Turn your imagination into visual art
-        in seconds – just type, and watch the magic happen.
+        Unleash your creativity with AI and get work done faster. From image
+        generation to utilities like URL shortener, QR code generation, code
+        tools, and summaries, PixnexAI keeps everything in one place.
       </motion.p>
       <motion.button
         whileHover={{ scale: 1.05 }}
@@ -62,7 +63,7 @@ const Header = () => {
         onClick={handleClick}
         className="sm:text-lg text-white bg-black w-auto mt-8 px-12 py-2.5 flex items-center gap-2 rounded-full"
       >
-        Generate Images
+        Try Image Generator
         <img className="w-6" src={assets.star_group} />
       </motion.button>
       <motion.div
@@ -99,3 +100,4 @@ const Header = () => {
 };
 
 export default Header;
+

@@ -10,12 +10,14 @@ const AppContextProvider = (props) => {
   const [showLogin, setShowLogin] = useState(false);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [credit, setCredit] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate()
 
   const loadCreditsData = async () => {
     try {
+      setIsAuthLoading(true);
       const { data } = await axios.get(`${backendUrl}/api/user/credits`, {
         headers: { token },
       });
@@ -26,6 +28,8 @@ const AppContextProvider = (props) => {
     } catch (error) {
       console.log(error);
       toast.error(error.message);
+    } finally {
+      setIsAuthLoading(false);
     }
   };
 
@@ -193,6 +197,166 @@ const AppContextProvider = (props) => {
     }
   };
 
+  const fetchAdminUsers = async () => {
+    try {
+      const { data } = await axios.get(
+        backendUrl + "/api/user/admin/users",
+        { headers: { token } }
+      );
+      if (data.success) {
+        return data.users;
+      }
+      toast.error(data.message || "Failed to load users");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return [];
+  };
+
+  const adminCreateUser = async ({ name, email, password, role, creditBalance }) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/user/admin/users",
+        { name, email, password, role, creditBalance },
+        { headers: { token } }
+      );
+      if (data.success) {
+        toast.success("User created");
+        return data.user;
+      }
+      toast.error(data.message || "Failed to create user");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return null;
+  };
+
+  const adminUpdateCredits = async (id, credits) => {
+    try {
+      const { data } = await axios.patch(
+        backendUrl + `/api/user/admin/users/${id}/credits`,
+        { credits },
+        { headers: { token } }
+      );
+      if (data.success) {
+        toast.success("Credits updated");
+        return data.user;
+      }
+      toast.error(data.message || "Failed to update credits");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return null;
+  };
+
+  const adminDeleteUser = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        backendUrl + `/api/user/admin/users/${id}`,
+        { headers: { token } }
+      );
+      if (data.success) {
+        toast.success("User deleted");
+        return true;
+      }
+      toast.error(data.message || "Failed to delete user");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return false;
+  };
+
+  const shortenUrl = async ({ url, customAlias }) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/utility/shorten",
+        { url, customAlias },
+        { headers: { token } }
+      );
+      if (data.success) {
+        loadCreditsData();
+        return data.data;
+      }
+      toast.error(data.message || "Failed to shorten URL");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return null;
+  };
+
+  const listShortUrls = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + "/api/utility/shorten", {
+        headers: { token },
+      });
+      if (data.success) {
+        return data.urls;
+      }
+      toast.error(data.message || "Failed to load URLs");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return [];
+  };
+
+  const deleteShortUrl = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        backendUrl + `/api/utility/shorten/${id}`,
+        { headers: { token } }
+      );
+      if (data.success) {
+        toast.success("Short URL deleted");
+        return true;
+      }
+      toast.error(data.message || "Failed to delete URL");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return false;
+  };
+
+  const summarizeText = async (text) => {
+    try {
+      const { data } = await axios.post(
+        backendUrl + "/api/utility/summarize",
+        { text },
+        { headers: { token } }
+      );
+      if (data.success) {
+        return data;
+      }
+      toast.error(data.message || "Failed to summarize");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return null;
+  };
+
+  const fetchAdminStats = async () => {
+    try {
+      const { data } = await axios.get(
+        backendUrl + "/api/user/admin/stats",
+        { headers: { token } }
+      );
+      if (data.success) {
+        return data;
+      }
+      toast.error(data.message || "Failed to load stats");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+    return { stats: { totalUsers: 0, totalCreditsUsed: 0 }, recentLogins: [] };
+  };
 
   const logout = () => {
     localStorage.removeItem('token')
@@ -224,7 +388,17 @@ const AppContextProvider = (props) => {
     removeBackgroundImage,
     removeTextImage,
     replaceBackgroundImage,
-    uncropImage
+    uncropImage,
+    isAuthLoading,
+    fetchAdminUsers,
+    adminCreateUser,
+    adminUpdateCredits,
+    adminDeleteUser,
+    fetchAdminStats,
+    shortenUrl,
+    listShortUrls,
+    deleteShortUrl,
+    summarizeText
   };
 
   return (

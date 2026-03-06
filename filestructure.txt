@@ -51,10 +51,16 @@
         |-- index.css
         |-- main.jsx
         |-- pages
+            |-- Admin.jsx
             |-- BuyCredit.jsx
+            |-- Compiler.jsx
             |-- Home.jsx
+            |-- InputTester.jsx
+            |-- QrGenerator.jsx
             |-- Result.jsx
+            |-- TextSummarizer.jsx
             |-- Tools.jsx
+            |-- UrlShortener.jsx
     |-- tailwind.config.js
     |-- vercel.json
     |-- vite.config.js
@@ -71,14 +77,19 @@
     |-- controllers
         |-- imageController.js
         |-- userController.js
+        |-- utilityController.js
     |-- middlewares
+        |-- adminAuth.js
         |-- auth.js
     |-- models
+        |-- loginLogModel.js
+        |-- shortUrlModel.js
         |-- userModel.js
     |-- package-lock.json
     |-- package.json
     |-- routes
         |-- imageRoutes.js
         |-- userRoutes.js
+        |-- utilityRoutes.js
     |-- server.js
     |-- vercel.json

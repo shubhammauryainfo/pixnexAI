@@ -4,6 +4,7 @@ import "dotenv/config";
 import connectDB from "./config/mongodb.js";
 import userRouter from "./routes/userRoutes.js";
 import imageRouter from "./routes/imageRoutes.js";
+import utilityRouter from "./routes/utilityRoutes.js";
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -22,6 +23,7 @@ app.use(
 await connectDB();
 app.use("/api/user", userRouter);
 app.use("/api/image", imageRouter);
+app.use("/api/utility", utilityRouter);
 app.get("/", (req, res) => {
   return res.send("API WORKING");
 });

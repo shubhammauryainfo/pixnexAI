@@ -16,6 +16,14 @@ const Navbar = () => {
       <div>
         {user ? (
           <div className="flex items-center justify-center text-center gap-2 sm:gap-3">
+            {user.role === "admin" && (
+              <button
+                className="flex items-center gap-2 bg-amber-100 px-4 sm:px-6 py-1.5 sm:py-3 rounded-full hover:scale-105 transition"
+                onClick={() => navigate("/admin")}
+              >
+                Admin
+              </button>
+            )}
             <button
               className="flex items-center gap-2 bg-blue-100 px-4 sm:px-6 py-1.5 sm:py-3 rounded-full hover:scale-105 transition"
               onClick={() => navigate("/buy")}

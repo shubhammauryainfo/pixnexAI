@@ -22,6 +22,7 @@ const checkUserCredits = async (userId) => {
 const deductCredits = async (userId, currentBalance) => {
   await userModel.findByIdAndUpdate(userId, {
     creditBalance: currentBalance - 1,
+    $inc: { creditsUsed: 1 },
   });
   return currentBalance - 1;
 };
